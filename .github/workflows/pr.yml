@@ -1,20 +1,20 @@
-# name: Pull Request
-# on: [pull_request]
-# jobs:
-#   PullRequest:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Check out repository code
-#         uses: actions/checkout@v3
-#       - name: Make envfile
-#         uses: SpicyPizza/create-envfile@v1
-#         with:
-#           envkey_POSTGRES_USER: "postgres"
-#           envkey_POSTGRES_PASSWORD: "1234"
-#           envkey_POSTGRES_DB: "repoback-test"
-#           envkey_DATABASE_URL: "DATABASE_URL=postgres://postgres:1234@bd:5432/repoback-test"
-#           file_name: .env.test
-#       - name: Run tests
-#         run: docker-compose -f docker-compose-test.yml run node_app npm run test
-#       - name: Build
-#         run: npm i && npm run build
+name: Pull Request
+on: [pull_request]
+jobs:
+  PullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_POSTGRES_USER: "postgres"
+          envkey_POSTGRES_PASSWORD: "1234"
+          envkey_POSTGRES_DB: "repoback-test"
+          envkey_DATABASE_URL: "DATABASE_URL=postgres://postgres:1234@bd:5432/repoback-test"
+          file_name: .env.test
+      - name: Run tests
+        run: docker-compose -f docker-compose-test.yml run node_app npm run test
+      - name: Build
+        run: npm i && npm run build
